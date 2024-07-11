@@ -19,11 +19,24 @@ const ModalAgregar = ({ agregarArticulo }) => {
     });
 
     const unidades = [
-        { label: 'unidad', value: 'unidad' },
-        { label: 'manojo', value: 'manojo' },
-        { label: 'kilo', value: 'kilo' },
-        { label: 'litro', value: 'litro' }
+        { label: 'Unidad', value: 'unidad' },
+        { label: 'Kilo', value: 'kilo' },
+        { label: 'Litro', value: 'litro' },
+        { label: 'Paquete', value: 'paquete' },
+        { label: 'Bolsa', value: 'bolsa' },
+        { label: 'Docena', value: 'docena' },
+        { label: 'pack-5', value: 'pack-5' },
+        { label: 'pack-10', value: 'pack-10' },
+        { label: 'Caja', value: 'caja' },
+        { label: 'Par', value: 'par' },
+        { label: 'Manojo', value: 'manojo' },
+        { label: 'Botella', value: 'botella' },     
+        { label: 'Gramo', value: 'gramo' },
+        { label: 'Mililitro', value: 'mililitro' },
+        { label: 'Metro', value: 'metro' },
+        { label: 'Centímetro', value: 'centimetro' },
     ];
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
