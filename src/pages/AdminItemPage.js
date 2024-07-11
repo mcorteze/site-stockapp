@@ -1,10 +1,11 @@
+// AdminItemPage.js
 import React from 'react';
 
 const AdminItemPage = () => {
   return (
-    <div style={{ padding: '20px', textAlign: 'center' }}>
+    <div>
       <h2>Administrar Items</h2>
-      {/* Aquí puedes añadir la lógica para manejar los items */}
+      {/* Aquí va el contenido para administrar items */}
     </div>
   );
 };

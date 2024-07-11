@@ -3,6 +3,8 @@ import MenuGeneral from './components/MenuGeneral';
 import InicioPage from './pages/InicioPage';
 import ItemPage from './pages/ItemPage';
 import AdminPage from './pages/AdminPage'; // Importa la página de administración
+import AdminCategoriaPage from './pages/AdminCategoriaPage'; // Importa la página de administración de categorías
+import AdminItemPage from './pages/AdminItemPage'; // Importa la página de administración de items
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Importa Routes en lugar de Switch
 import { onValue, ref, off } from 'firebase/database';
 import { db } from './firebase/firebase';
@@ -55,6 +57,8 @@ const App = () => {
         <section id="contenido">
           <Routes>
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/admin/categorias" element={<AdminCategoriaPage />} />
+            <Route path="/admin/items" element={<AdminItemPage />} />
             <Route path="/" element={
               conexionFirebase ? (
                 productoSeleccionado ? (
