@@ -1,0 +1,40 @@
+{
+  "categorias": [
+    {
+      "label": "Categoria 1",
+      "icon": "pi pi-fw pi-tag",
+      "items": [
+        {
+          "id": 1,
+          "nombre": "Producto 1",
+          "precio": 100,
+          "proveedor": "Proveedor 1",
+          "stock": 50,
+          "unidad": "unidad"
+        },
+        {
+          "id": 2,
+          "nombre": "Producto 2",
+          "precio": 200,
+          "proveedor": "Proveedor 2",
+          "stock": 30,
+          "unidad": "unidad"
+        }
+      ]
+    },
+    {
+      "label": "Categoria 2",
+      "icon": "pi pi-fw pi-tag",
+      "items": [
+        {
+          "id": 3,
+          "nombre": "Producto 3",
+          "precio": 150,
+          "proveedor": "Proveedor 3",
+          "stock": 20,
+          "unidad": "unidad"
+        }
+      ]
+    }
+  ]
+}
