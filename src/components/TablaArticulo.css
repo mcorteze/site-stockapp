@@ -1,0 +1,29 @@
+/* Estilos generales para la tabla */
+.p-datatable {
+    margin-top: 20px;
+}
+
+/* Estilos específicos para móviles */
+@media only screen and (max-width: 600px) {
+    .p-datatable {
+        font-size: 0.9em;
+    }
+
+    .p-datatable-wrapper {
+        overflow-x: auto;
+    }
+
+    .p-inputgroup {
+        flex-direction: column;
+    }
+
+    .p-inputgroup > .p-inputtext {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .p-button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

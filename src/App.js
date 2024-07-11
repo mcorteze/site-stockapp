@@ -1,85 +1,61 @@
 import React, { useState, useEffect } from 'react';
-import MenuGeneral from './components/MenuGeneral';
-import InicioPage from './pages/InicioPage';
-import ItemPage from './pages/ItemPage';
-import AdminPage from './pages/AdminPage'; // Importa la página de administración
-import AdminCategoriaPage from './pages/AdminCategoriaPage'; // Importa la página de administración de categorías
-import AdminItemPage from './pages/AdminItemPage'; // Importa la página de administración de items
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Importa Routes en lugar de Switch
-import { onValue, ref, off } from 'firebase/database';
-import { db } from './firebase/firebase';
-
+import ModalAgregar from './components/ModalAgregar';
+import TablaArticulo from './components/TablaArticulo';
+import ModalEditarStock from './components/ModalEditarStock';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-
 import './App.css';
+import articulosData from './data/articulos';
 
 const App = () => {
-  const [productoSeleccionado, setProductoSeleccionado] = useState(null);
-  const [conexionFirebase, setConexionFirebase] = useState(false);
-  const [mensajeConexion, setMensajeConexion] = useState('Conectando con Firebase...');
-
-  const mostrarInformacionProducto = (producto) => {
-    setProductoSeleccionado(producto);
-  };
-
-  useEffect(() => {
-    const categoriasRef = ref(db, 'categorias');
-
-    const handleData = (snapshot) => {
-      const categoriasData = snapshot.val();
-      console.log('Datos recuperados de Firebase:', categoriasData); // Verificar los datos recuperados
-      if (categoriasData) {
-        setConexionFirebase(true);
-        setMensajeConexion('Conexión a Firebase establecida correctamente.');
-      } else {
-        setMensajeConexion('No se encontraron datos en Firebase.');
-      }
-    };
-
-    onValue(categoriasRef, handleData, (error) => {
-      console.error('Error al conectar con Firebase:', error);
-      setMensajeConexion('Error al conectar con Firebase.');
+    const [articulos, setArticulos] = useState(() => {
+        const savedArticulos = localStorage.getItem('articulos');
+        return savedArticulos ? JSON.parse(savedArticulos) : articulosData;
     });
 
-    return () => {
-      off(categoriasRef, 'value', handleData);
-    };
-  }, []);
+    const [selectedArticulo, setSelectedArticulo] = useState(null);
 
-  return (
-    <Router>
-      <div id="canvas">
-        <header id="header">
-          <MenuGeneral mostrarInformacionProducto={mostrarInformacionProducto} />
-        </header>
-        <section id="contenido">
-          <Routes>
-            <Route path="/admin" element={<AdminPage />} />
-            <Route path="/admin/categorias" element={<AdminCategoriaPage />} />
-            <Route path="/admin/items" element={<AdminItemPage />} />
-            <Route path="/" element={
-              conexionFirebase ? (
-                productoSeleccionado ? (
-                  <ItemPage producto={productoSeleccionado} />
-                ) : (
-                  <InicioPage />
-                )
-              ) : (
-                <p style={{ padding: '20px', textAlign: 'center' }}>{mensajeConexion}</p>
-              )
-            } />
-          </Routes>
-        </section>
-        <footer id="footer">
-          <div style={{ backgroundColor: '#f0f0f0', padding: '20px', textAlign: 'center' }}>
-            <p>Pie de página - Derechos reservados © 2024</p>
-          </div>
-        </footer>
-      </div>
-    </Router>
-  );
+    useEffect(() => {
+        localStorage.setItem('articulos', JSON.stringify(articulos));
+    }, [articulos]);
+
+    const agregarArticulo = (nuevoArticulo) => {
+        nuevoArticulo.id = articulos.length + 1;
+        const nuevosArticulos = [...articulos, nuevoArticulo];
+        setArticulos(nuevosArticulos);
+    };
+
+    const actualizarStock = (id, nuevoStock) => {
+        const nuevosArticulos = articulos.map((articulo) =>
+            articulo.id === id ? { ...articulo, stock: nuevoStock } : articulo
+        );
+        setArticulos(nuevosArticulos);
+    };
+
+    return (
+        <div id="canvas">
+            <header id="header">
+                Titulo de la aplicacion
+            </header>
+            <section id="contenido">
+                <ModalAgregar agregarArticulo={agregarArticulo} />
+                <TablaArticulo articulos={articulos} setSelectedArticulo={setSelectedArticulo} />
+                {selectedArticulo && (
+                    <ModalEditarStock
+                        articulo={selectedArticulo}
+                        actualizarStock={actualizarStock}
+                        onHide={() => setSelectedArticulo(null)}
+                    />
+                )}
+            </section>
+            <footer id="footer">
+                <div style={{ backgroundColor: '#f0f0f0', padding: '20px', textAlign: 'center' }}>
+                    <p>Pie de página - Derechos reservados © 2024</p>
+                </div>
+            </footer>
+        </div>
+    );
 };
 
 export default App;

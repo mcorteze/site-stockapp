@@ -1,44 +1,61 @@
-/* Estilos generales para el cuerpo del documento */
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Estilos para el contenedor principal */
-  #canvas {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    border: 1px solid red;
-  }
-  
-  /* Estilos para el encabezado */
+/* Estilos generales */
+#canvas {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+#header {
+  background-color: #007ad9;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+#contenido {
+  flex: 1;
+  padding: 20px;
+}
+
+#footer {
+  background-color: #f0f0f0;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Estilos para móviles */
+@media only screen and (max-width: 600px) {
   #header {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    border: 1px solid red;
+      font-size: 1.2em;
+      padding: 15px;
   }
-  
-  /* Estilos para el menú dentro del encabezado */
-  .menubar-demo {
-    background-color: #0056b3; /* Color de fondo del menú */
-  }
-  
-  /* Estilos para la sección de contenido */
+
   #contenido {
-    flex: 1; /* La sección de contenido ocupa todo el espacio restante */
-    padding: 20px;
-    border: 1px solid red;
+      padding: 10px;
   }
-  
-  /* Estilos para el pie de página */
-  #footer {
-    background-color: #f0f0f0;
-    padding: 10px;
-    text-align: center;
-    width: 100%;
-    border: 1px solid red;
+
+  .p-dialog {
+      width: 90% !important;
+      margin: 0 auto;
   }
-  
+
+  .p-datatable {
+      font-size: 0.9em;
+  }
+
+  .p-inputgroup {
+      flex-direction: column;
+  }
+
+  .p-inputgroup > .p-inputtext {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+
+  .p-button {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+}
